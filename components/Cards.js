@@ -49,8 +49,8 @@ const createCard = (object) => {
     imgContainer.appendChild(authImg);
 
     // Event Listners
-    card.addEventListener('click', (headline) => {
-        console.log(headline)
+    card.addEventListener('click', (heading) => {
+        console.log(heading)
     })
 
     return card;
