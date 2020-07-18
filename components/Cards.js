@@ -23,29 +23,69 @@
 
 
 const createCard = (object) => {
-// TODO: Create new HTML elements
-const card = document.createElement('div')
-const heading = document.createElement('div')
-const author = document.createElement('div')
-const imgContainer = document.createElement('div')
-const authImg = document.createElement('img')
-const authSpan = document.createElement('span')
+    // Create new HTML elements
+    const card = document.createElement('div');
+    const heading = document.createElement('div');
+    const author = document.createElement('div');
+    const imgContainer = document.createElement('div');
+    const authImg = document.createElement('img');
+    const authSpan = document.createElement('span');
 
-// TODO: Assign classes to new elements
-card.classList.add('card')
-heading.classList.add('headline')
-author.classList.add('author')
-imgContainer.classList.add('img-container')
+    // Assign classes to new elements
+    card.classList.add('card');
+    heading.classList.add('headline');
+    author.classList.add('author');
+    imgContainer.classList.add('img-container');
 
-// TODO: Define Content of elements
-heading.textContent = topics.object.headline
-authImg.src = topics.object.authorPhoto // URL of author's image. Found as an object in the topics array. 
-authSpan.textContent = `By ${topics.object.authorName}`
+    // Define Content of elements
+    heading.textContent = object.headline;
+    authImg.src = object.authorPhoto;
+    authSpan.textContent = `By ${object.authorName}`;
 
-// TODO: Build HTML Structure
+    // Build HTML Structure
+    card.appendChild(heading);
+    card.appendChild(author);
+    author.appendChild(imgContainer);
+    author.appendChild(authSpan);
+    imgContainer.appendChild(authImg);
 
+    // Event Listners
+    card.addEventListener('click', (object) => {
+        console.log(object.headline)
+    })
 
-    return card
+    return card;
 }
 
+// Use forEach to call each object in the articles array
+
+// data.articles.forEach((item) => {
+//     if (topics.bootstrap = true) {
+//         return item.bootstrap
+//     } else if (topics.javascript) {
+//         return item.javascript
+//     } else if (topics.jquery) {
+//         return item.jquery
+//     } else if (topics.node) {
+//         return item.node
+//     } else if (topics.technology) {
+//         return item.technology
+//     }
+// })
+
+// Create Event Listeners for each topic button to switch which articles are shown based on which is clicked.
+// 
+
+const enter = document.querySelector('.cards-container')
+
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
+    .then(success => {
+        console.log(success)
+        success.data.articles.javascript.forEach(article => {
+            const newCard = createCard(article)
+            enter.appendChild(newCard)
+        })
+    })
+    .catch((error) => {
+        console.log('Whoops!', error)
+    })
