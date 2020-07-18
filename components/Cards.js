@@ -21,7 +21,6 @@
 //
 // Use your function to create a card for each of the articles, and append each card to the DOM.
 
-
 const createCard = (object) => {
     // Create new HTML elements
     const card = document.createElement('div');
@@ -50,8 +49,8 @@ const createCard = (object) => {
     imgContainer.appendChild(authImg);
 
     // Event Listners
-    card.addEventListener('click', (object) => {
-        console.log(object.headline)
+    card.addEventListener('click', (headline) => {
+        console.log(headline)
     })
 
     return card;

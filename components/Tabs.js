@@ -25,8 +25,8 @@ const entry = document.querySelector('.topics')
 axios.get('https://lambda-times-backend.herokuapp.com/topics')
     .then((success) => {
         console.log(success)
-        success.data.topics.forEach((item) => { // Figured out where the name of the axios array is :D
-            const newTab = createTab(item)
+        success.data.topics.forEach((topic) => { // Figured out where the name of the axios array is :D
+            const newTab = createTab(topic)
             entry.appendChild(newTab)
         }) 
     })
