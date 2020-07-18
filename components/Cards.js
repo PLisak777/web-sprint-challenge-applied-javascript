@@ -80,6 +80,7 @@ const enter = document.querySelector('.cards-container')
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
     .then(success => {
         console.log(success)
+        // TODO: Figure out how to export event listener from Tabs.js to determine which topic is being clicked on
         success.data.articles.javascript.forEach(article => {
             const newCard = createCard(article)
             enter.appendChild(newCard)
