@@ -21,8 +21,9 @@
 //
 // Use your function to create a card for each of the articles, and append each card to the DOM.
 
+
+
 const createCard = (object) => {
-    // Create new HTML elements
     const card = document.createElement('div');
     const heading = document.createElement('div');
     const author = document.createElement('div');
@@ -30,65 +31,66 @@ const createCard = (object) => {
     const authImg = document.createElement('img');
     const authSpan = document.createElement('span');
 
-    // Assign classes to new elements
     card.classList.add('card');
     heading.classList.add('headline');
     author.classList.add('author');
     imgContainer.classList.add('img-container');
 
-    // Define Content of elements
     heading.textContent = object.headline;
     authImg.src = object.authorPhoto;
     authSpan.textContent = `By ${object.authorName}`;
 
-    // Build HTML Structure
     card.appendChild(heading);
     card.appendChild(author);
     author.appendChild(imgContainer);
     author.appendChild(authSpan);
     imgContainer.appendChild(authImg);
 
-    // Event Listners
-    card.addEventListener('click', (heading) => {
-        console.log(heading)
-    })
 
-    //TODO: Create variables for each 'card' class. How do I tell JS to differentiate which tab is selected though?
-    //TODO: addEventListener to each tab so that when clicked, it displays the articles for the corresponding topic.
-    
-    // const jsTab = document.querySelector('.tab')
 
     return card;
 }
 
-// Use forEach to call each object in the articles array
-
-// data.articles.forEach((item) => {
-//     if (topics.bootstrap = true) {
-//         return item.bootstrap
-//     } else if (topics.javascript) {
-//         return item.javascript
-//     } else if (topics.jquery) {
-//         return item.jquery
-//     } else if (topics.node) {
-//         return item.node
-//     } else if (topics.technology) {
-//         return item.technology
-//     }
-// })
-
-// Create Event Listeners for each topic button to switch which articles are shown based on which is clicked.
-// 
-
 const enter = document.querySelector('.cards-container')
 
+    // Created array to identify tab content from Tabs.js in order to create event listeners and display corresponding articles
+    // const tabArray = axios.get('https://lambda-times-backend.herokuapp.com/topics')
+    //     .then((response) => {
+    //         const jsTab = response.data.topics[0];
+    //         const bootTab = response.data.topics[1];
+    //         const techTab = response.data.topics[2];
+    //         const jQueryTab = response.data.topics[3];
+    //         const nodeTab = response.data.topics[4];
+    //     })            
+
+    //     jsTab.addEventListener('click', (tab) => {
+    //         axios.get('https://lambda-times-backend.herokuapp.com/articles')
+    //         .then(response => {
+    //             console.log(response)
+    //             tab.forEach(article => {
+    //                 const newCard = createCard(article)
+    //                 enter.appendChild(newCard)
+    //             })
+    //         })
+    //         .catch((error) => {
+    //             console.log('Whoops!', error)
+    //         })
+    //     })
+
+
+
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
-    .then(success => {
-        console.log(success)
+    .then(response => {
+        console.log(response)
         // TODO: Figure out how to export event listener from Tabs.js to determine which topic is being clicked on
-        success.data.articles.javascript.forEach(article => {
+        response.data.articles.javascript.forEach(article => {
             const newCard = createCard(article)
             enter.appendChild(newCard)
+            // Add Event Listener to log headline to console when article is clicked. 
+            newCard.addEventListener('click', (obj) => {
+                const headline = obj.data.articles.headline
+                console.log(headline)
+            })
         })
     })
     .catch((error) => {
