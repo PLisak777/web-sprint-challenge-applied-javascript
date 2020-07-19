@@ -53,6 +53,11 @@ const createCard = (object) => {
         console.log(heading)
     })
 
+    //TODO: Create variables for each 'card' class. How do I tell JS to differentiate which tab is selected though?
+    //TODO: addEventListener to each tab so that when clicked, it displays the articles for the corresponding topic.
+    
+    // const jsTab = document.querySelector('.tab')
+
     return card;
 }
 
