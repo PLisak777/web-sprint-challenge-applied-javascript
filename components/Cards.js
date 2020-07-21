@@ -48,48 +48,19 @@ const createCard = (object) => {
 };
 
 const enter = document.querySelector('.cards-container');
-// Created array to identify tab content from Tabs.js in order to create event listeners and display corresponding articles
-const tabArray = axios
-  .get('https://lambda-times-backend.herokuapp.com/topics')
+
+axios
+  .get('https://lambda-times-backend.herokuapp.com/articles')
   .then((response) => {
-    const jsTab = response.data.topics[0];
-    const bootTab = response.data.topics[1];
-    const techTab = response.data.topics[2];
-    const jQueryTab = response.data.topics[3];
-    const nodeTab = response.data.topics[4];
-    console.log(response);
-
-    axios
-      .get('https://lambda-times-backend.herokuapp.com/articles')
-      .then((response) => {
-        console.log(response);
-        // TODO: Figure out how to export event listener from Tabs.js to determine which topic is being clicked on
-        response.data.articles.javascript.forEach((article) => {
-          const newCard = createCard(article);
-          enter.appendChild(newCard);
-        });
-        // Add Event Listener to log headline to console when article is clicked.
-        newCard.addEventListener('click', () => {
-          const headline = response.data.articles.javascript.headline;
-          console.log(headline);
-        });
-      })
-      .catch((error) => {
-        console.log('Whoops!', error);
+    response.data.articles.javascript.forEach((article) => {
+      const newCard = createCard(article);
+      enter.appendChild(newCard);
+      newCard.addEventListener('click', () => {
+        const headline = article.headline;
+        console.log(headline);
       });
-
-    axios
-      .get('https://lambda-times-backend.herokuapp.com/articles')
-      .then((response) => {
-        jsTab
-          .addEventListener('click', () => {
-            response.forEach((article) => {
-              const newCard = createCard(article);
-              enter.appendChild(newCard);
-            });
-          })
-          .catch((error) => {
-            console.log('Whoops!', error);
-          });
-      });
+    });
+  })
+  .catch((error) => {
+    console.log('Whoops!', error);
   });

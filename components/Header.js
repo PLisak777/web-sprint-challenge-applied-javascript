@@ -12,29 +12,29 @@
 // and append it to the DOM inside the div.header-container
 
 function Header() {
-    //TODO: Create Variables
-const header = document.createElement('div')
-const date = document.createElement('span')
-const headLine = document.createElement('h1')
-const temp = document.createElement('span')
+  // Create Variables
+  const header = document.createElement('div');
+  const date = document.createElement('span');
+  const headLine = document.createElement('h1');
+  const temp = document.createElement('span');
 
-// TODO: Assign Classes to Created Elements
-header.classList.add('header')
-date.classList.add('date')
-temp.classList.add('temp')
+  // Assign Classes to Created Elements
+  header.classList.add('header');
+  date.classList.add('date');
+  temp.classList.add('temp');
 
-// TODO: Create Content for Created Elements
-headLine.textContent = 'Lambda Times'
-temp.textContent = '98°'
+  // Create Content for Created Elements
+  headLine.textContent = 'Lambda Times';
+  temp.textContent = '98°';
 
-// TODO: HTML Structure
-header.appendChild(date)
-header.appendChild(headLine)
-header.appendChild(temp)
+  // HTML Structure
+  header.appendChild(date);
+  header.appendChild(headLine);
+  header.appendChild(temp);
 
-return header
+  return header;
 }
 
-const createHeader = Header()
-const entryPoint = document.querySelector('.header-container')
-entryPoint.appendChild(createHeader)
+const createHeader = Header();
+const entryPoint = document.querySelector('.header-container');
+entryPoint.appendChild(createHeader);
